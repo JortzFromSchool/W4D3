@@ -1,4 +1,6 @@
 class CoffeeError < StandardError; end
+class YearsError < StandardError; end
+class EmptyError < StandardError; end
 
 # PHASE 2
 def convert_to_int(str)
@@ -32,7 +34,13 @@ end
 # PHASE 4
 class BestFriend
   def initialize(name, yrs_known, fav_pastime)
+    if name.length <= 0 || fav_pastime.length <= 0
+      raise EmptyError.new("name or fav_pastime cannot be empty")
+    end
     @name = name
+    if yrs_known < 5
+      raise YearsError.new("need at least 5 years")
+    end
     @yrs_known = yrs_known
     @fav_pastime = fav_pastime
   end
